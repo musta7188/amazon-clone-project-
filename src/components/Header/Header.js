@@ -31,6 +31,7 @@ export default function Header() {
           <span className="header__optionLineTwo">Prime</span>
         </div>
 
+      {/* shopping cart dynamic */}
         <div className="header__optionBasket">
         <ShoppingCartIcon className="shopping_cart"/>
         <span className="header__optionLineTwo header_basketCount">0</span>

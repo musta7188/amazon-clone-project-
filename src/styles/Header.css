@@ -75,6 +75,11 @@ width: 100%;
   color: white;
   display: flex;
   align-items: center;
-    padding-right: 30px ;
+  
+}
+
+.header_basketCount{
+  margin-left: 10px ;
+  margin-right: 10px;
 }
 /* options end */
