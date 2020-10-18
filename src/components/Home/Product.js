@@ -11,9 +11,11 @@ export default function Product() {
           <strong>199</strong>
         </p>
         <div className="product_rating">
-
+          <p>⭐️</p>
         </div>
       </div>
+      <img src="https://images-na.ssl-images-amazon.com/images/I/51hlRhTeRkL._SX369_BO1,204,203,200_.jpg" alt="image book"/>
+      <button>Add to Basket</button>
     </div>
   );
 }
