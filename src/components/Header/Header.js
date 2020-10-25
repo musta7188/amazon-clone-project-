@@ -2,14 +2,18 @@ import React from "react";
 import "../../styles/Header.css";
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import {Link} from 'react-router-dom'
 export default function Header() {
   return (
     <div className="header">
       {/* amazon logo */}
-      <img
+     <Link to="/">
+     <img
         className="header__logo"
         src={"https://pngimg.com/uploads/amazon/amazon_PNG25.png"}
+        
       />
+      </Link>
       {/* search filed next to the logo */}
 
       <div className="header__search">
@@ -33,7 +37,9 @@ export default function Header() {
 
       {/* shopping cart dynamic */}
         <div className="header__optionBasket">
+          <Link to="/checkout">
         <ShoppingCartIcon className="shopping_cart"/>
+        </Link>
         <span className="header__optionLineTwo header_basketCount">0</span>
         </div>
       </div>
