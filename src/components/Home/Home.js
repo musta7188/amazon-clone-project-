@@ -14,9 +14,11 @@ export default function Home() {
             muted="true"
             src="https://images-eu.ssl-images-amazon.com/images/G/02/Events/2020/APDHF/AMZ_PD20_UK_EN_GW011_Day1_Gifting_08_1500x300._CB403881914_.jpg"
           />
-          
+          <div className="product_container">
           <div className="home__row">
-          <Product/>
+          <Product title="The lean startup" 
+          price={29.99} 
+          image="https://images-na.ssl-images-amazon.com/images/I/51hlRhTeRkL._SX369_BO1,204,203,200_.jpg" rating={5} />
           <Product/>
           </div>
 
@@ -28,6 +30,7 @@ export default function Home() {
 
           <div className="home__row">
           <Product/>
+          </div>
           </div>
       </div>
     </div>

@@ -1,20 +1,30 @@
 import React from "react";
 import "../../styles/Product.css";
 
-export default function Product() {
+export default function Product({title, image, price, rating}) {
+
+  let ratingStar = ""
+  for(let i = 0; i < rating; i++){
+    ratingStar+="⭐️"
+  }
+
+
   return (
     <div className="product">
       <div className="product__info">
-        <p>The lean startup</p>
+          <p>{title}</p>
         <p className="product__price">
           <small>$</small>
-          <strong>199</strong>
+          <strong>{price}</strong>
         </p>
         <div className="product_rating">
-          <p>⭐️</p>
+          <p>{ratingStar}</p>
         </div>
       </div>
-      <img src="https://images-na.ssl-images-amazon.com/images/I/51hlRhTeRkL._SX369_BO1,204,203,200_.jpg" alt="image book"/>
+      <img
+        src={image}
+        alt="image book"
+      />
       <button>Add to Basket</button>
     </div>
   );
