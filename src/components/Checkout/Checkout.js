@@ -17,7 +17,6 @@ export default function Checkout() {
       </div>
       <div className="checkout__right">
         <Subtotal/>
-        <h2>The subtotal will go here</h2>
       </div>
     </div>
   );
