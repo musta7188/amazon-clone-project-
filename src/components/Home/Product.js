@@ -2,12 +2,13 @@ import React from "react";
 import "../../styles/Product.css";
 import { connect } from "react-redux";
 
-function Product({ title, image, price, rating, saveItemsInBasket }) {
+function Product({ id, title, image, price, rating, saveItemsInBasket }) {
 
   
 
   const addToBasket = () =>{
     saveItemsInBasket({
+      id: id,
       title:title,
       image: image,
       price: price,

@@ -3,7 +3,8 @@ import "../../styles/Header.css";
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import {Link} from 'react-router-dom'
-export default function Header() {
+import {connect} from 'react-redux'
+function Header({count}) {
   return (
     <div className="header">
       {/* amazon logo */}
@@ -40,9 +41,17 @@ export default function Header() {
           <Link to="/checkout">
         <ShoppingCartIcon className="shopping_cart"/>
         </Link>
-        <span className="header__optionLineTwo header_basketCount">0</span>
+  <span className="header__optionLineTwo header_basketCount">{count}</span>
         </div>
       </div>
     </div>
   );
 }
+
+const mapStateToProps = (state) =>{
+  return{
+    count: state.itemsCount
+  }
+}
+
+export default connect(mapStateToProps)(Header)

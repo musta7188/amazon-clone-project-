@@ -1,5 +1,6 @@
 const initialState = {
   basket: [],
+  itemsCount: 0
 };
 
 const ReducerApp = (state = initialState, action) => {
@@ -8,6 +9,7 @@ const ReducerApp = (state = initialState, action) => {
       return {
         ...state,
         basket: [...state.basket, action.payload],
+        itemsCount: state.basket.length + 1
       };
 
       default:
