@@ -1,9 +1,9 @@
 import React from "react";
-import "../styles/App.css";
-import Header from "../components/Header/Header";
-import Home from "../components/Home/Home";
+import "../../styles/App.css";
+import Header from "../Header/Header";
+import Home from "../Home/Home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Checkout from './Checkout/Checkout'
+import Checkout from '../Checkout/Checkout'
 function App() {
   return (
     <Router>

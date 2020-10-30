@@ -1,18 +1,31 @@
 import React from "react";
 import "../../styles/Product.css";
+import { connect } from "react-redux";
 
-export default function Product({title, image, price, rating}) {
+function Product({ title, image, price, rating, saveItemsInBasket }) {
 
-  let ratingStar = ""
-  for(let i = 0; i < rating; i++){
-    ratingStar+="⭐️"
+  
+
+  const addToBasket = () =>{
+    saveItemsInBasket({
+      title:title,
+      image: image,
+      price: price,
+      rating: rating
+    })
   }
 
+
+
+  let ratingStar = "";
+  for (let i = 0; i < rating; i++) {
+    ratingStar += "⭐️";
+  }
 
   return (
     <div className="product">
       <div className="product__info">
-          <p>{title}</p>
+        <p>{title}</p>
         <p className="product__price">
           <small>$</small>
           <strong>{price}</strong>
@@ -21,11 +34,16 @@ export default function Product({title, image, price, rating}) {
           <p>{ratingStar}</p>
         </div>
       </div>
-      <img
-        src={image}
-        alt="image book"
-      />
-      <button>Add to Basket</button>
+      <img src={image} alt="image book" />
+      <button onClick={addToBasket}>Add to Basket</button>
     </div>
   );
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    saveItemsInBasket: (item) => dispatch({type: "ADD_TO_BASKET", payload: item})
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Product);
