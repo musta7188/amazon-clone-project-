@@ -1,8 +1,19 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "../../styles/Checkout.css";
 import Subtotal from './Subtotal'
-import Product from '../Home/Product'
-export default function Checkout() {
+import {connect} from 'react-redux'
+import CheckoutProduct from './CheckOutProduct'
+
+
+function Checkout({basket}) {
+
+  const [basketItem, setBasket] = useState([])
+
+  console.log(basketItem)
+  useEffect(() =>{
+    setBasket(basket)
+  })
+
   return (
     <div className="checkout">
       <div className="checkout_left">
@@ -14,6 +25,19 @@ export default function Checkout() {
 
         <div>
           <h2 className="checkout__title">Your shopping Basket</h2>
+          {basketItem.map(item => {
+           return <>
+            <CheckoutProduct
+              id={item.id}
+              image={item.image}
+              title={item.title}
+              price={item.price}
+              rating={item.rating}
+            
+            />
+            </>
+          })}
+
         </div>
       </div>
       <div className="checkout__right">
@@ -23,3 +47,10 @@ export default function Checkout() {
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    basket: state.basket,
+  };
+};
+export default connect(mapStateToProps)(Checkout)

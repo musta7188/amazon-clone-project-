@@ -1,23 +1,19 @@
 import React from "react";
-import CurrencyFormat from "react-currency-format";
 import "../../styles/Subtotal.css";
-import {connect} from 'react-redux'
-
-function Subtotal({count, basket}) {
-  
-  let totalPrice = 0;
-  basket.forEach((items) =>{
-    totalPrice+= items.price
-  })
+import { connect } from "react-redux";
+import NumberFormat from "react-number-format";
+function Subtotal({ basket }) {
+  ////take each item in the basket and add the price value to amount variable
+  let totalPrice = basket.reduce((amount, items) => items.price + amount, 0);
 
   return (
     <div className="subtotal">
-      <CurrencyFormat
+      <NumberFormat
         renderText={(value) => (
           <>
             <p>
-              Subtotal ({count} items):
-              <strong>{`${totalPrice}`}</strong>
+              Subtotal ({basket.length} items):
+              <strong>{`${value}`}</strong>
             </p>
             <small className="subtotal__gift">
               <input type="checkbox" /> This order contains a gift
@@ -25,7 +21,7 @@ function Subtotal({count, basket}) {
           </>
         )}
         decimalScale={2}
-        value={0}
+        value={totalPrice}
         displayType={"text"}
         thousandSeparator={true}
         prefix={"$"}
@@ -35,11 +31,10 @@ function Subtotal({count, basket}) {
   );
 }
 
-const mapStateToProps = (state) =>{
-  return{
-    count: state.itemsCount,
-    basket: state.basket
-  }
-}
+const mapStateToProps = (state) => {
+  return {
+    basket: state.basket,
+  };
+};
 
-export default connect(mapStateToProps)(Subtotal)
+export default connect(mapStateToProps)(Subtotal);

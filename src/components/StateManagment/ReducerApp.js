@@ -3,6 +3,7 @@ const initialState = {
   itemsCount: 0
 };
 
+
 const ReducerApp = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_TO_BASKET":
@@ -15,6 +16,15 @@ const ReducerApp = (state = initialState, action) => {
       default:
         return state;
 };
+}
+
+
+export const ratingStartProduct = (rating) =>{
+  let ratingStar = "";
+  for (let i = 0; i < rating; i++) {
+    ratingStar += "⭐️";
+  }
+  return ratingStar
 }
 
 export default ReducerApp;

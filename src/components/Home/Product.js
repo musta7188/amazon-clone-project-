@@ -1,7 +1,7 @@
 import React from "react";
 import "../../styles/Product.css";
 import { connect } from "react-redux";
-
+import {ratingStartProduct} from '../StateManagment/ReducerApp'
 function Product({ id, title, image, price, rating, saveItemsInBasket }) {
 
   
@@ -18,10 +18,6 @@ function Product({ id, title, image, price, rating, saveItemsInBasket }) {
 
 
 
-  let ratingStar = "";
-  for (let i = 0; i < rating; i++) {
-    ratingStar += "⭐️";
-  }
 
   return (
     <div className="product">
@@ -32,7 +28,7 @@ function Product({ id, title, image, price, rating, saveItemsInBasket }) {
           <strong>{price}</strong>
         </p>
         <div className="product_rating">
-          <p>{ratingStar}</p>
+          <p>{ratingStartProduct(rating)}</p>
         </div>
       </div>
       <img src={image} alt="image book" />
