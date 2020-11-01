@@ -1,14 +1,16 @@
 import React from "react";
 import CurrencyFormat from "react-currency-format";
 import "../../styles/Subtotal.css";
-export default function Subtotal() {
+import {connect} from 'react-redux'
+
+function Subtotal({count}) {
   return (
     <div className="subtotal">
       <CurrencyFormat
         renderText={(value) => (
           <>
             <p>
-              Subtotal ({0} items):
+              Subtotal ({count} items):
               <strong>{`${0}`}</strong>
             </p>
             <small className="subtotal__gift">
@@ -26,3 +28,11 @@ export default function Subtotal() {
     </div>
   );
 }
+
+const mapStateToProps = (state) =>{
+  return{
+    count: state.itemsCount
+  }
+}
+
+export default connect(mapStateToProps)(Subtotal)
