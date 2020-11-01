@@ -3,7 +3,13 @@ import CurrencyFormat from "react-currency-format";
 import "../../styles/Subtotal.css";
 import {connect} from 'react-redux'
 
-function Subtotal({count}) {
+function Subtotal({count, basket}) {
+  
+  let totalPrice = 0;
+  basket.forEach((items) =>{
+    totalPrice+= items.price
+  })
+
   return (
     <div className="subtotal">
       <CurrencyFormat
@@ -11,7 +17,7 @@ function Subtotal({count}) {
           <>
             <p>
               Subtotal ({count} items):
-              <strong>{`${0}`}</strong>
+              <strong>{`${totalPrice}`}</strong>
             </p>
             <small className="subtotal__gift">
               <input type="checkbox" /> This order contains a gift
@@ -31,7 +37,8 @@ function Subtotal({count}) {
 
 const mapStateToProps = (state) =>{
   return{
-    count: state.itemsCount
+    count: state.itemsCount,
+    basket: state.basket
   }
 }
 
