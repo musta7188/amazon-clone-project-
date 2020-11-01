@@ -4,7 +4,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-function Header({count}) {
+function Header({basket}) {
   return (
     <div className="header">
       {/* amazon logo */}
@@ -41,7 +41,7 @@ function Header({count}) {
           <Link to="/checkout">
         <ShoppingCartIcon className="shopping_cart"/>
         </Link>
-  <span className="header__optionLineTwo header_basketCount">{count}</span>
+  <span className="header__optionLineTwo header_basketCount">{basket.length}</span>
         </div>
       </div>
     </div>
@@ -50,7 +50,7 @@ function Header({count}) {
 
 const mapStateToProps = (state) =>{
   return{
-    count: state.itemsCount
+    basket: state.basket
   }
 }
 

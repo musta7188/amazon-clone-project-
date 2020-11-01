@@ -2,9 +2,11 @@ import React from 'react'
 import '../../styles/CheckOutProduct.css'
 import {connect} from 'react-redux'
 import {ratingStartProduct} from '../StateManagment/ReducerApp'
- function CheckOutProduct({id, image, title, price, rating}) {
+ function CheckOutProduct({id, image, title, price, rating, RemoveItemFromBasket}) {
 
-  console.log(title)
+ const removeItem = () =>{
+  RemoveItemFromBasket(id)
+ }
   
   return (
     <div className='checkoutProduct'>
@@ -20,11 +22,16 @@ import {ratingStartProduct} from '../StateManagment/ReducerApp'
        <div className="checkoutProduct__rating">
         {ratingStartProduct(rating)}
        </div>
-       <button>Remove from basket</button>
+       <button onClick={() => removeItem()}>Remove from basket</button>
       </div>
     </div>
   )
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    RemoveItemFromBasket: (id) => dispatch({type: "REMOVE_FROM_BASKET", payload: id})
+  };
+};
 
-export default CheckOutProduct;
+export default  connect(null, mapDispatchToProps)(CheckOutProduct);

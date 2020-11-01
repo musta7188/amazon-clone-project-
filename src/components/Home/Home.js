@@ -16,14 +16,14 @@ export default function Home() {
         <div className="product_container">
           <div className="home__row">
             <Product
-              id="12342142"
+              id={12342142}
               title="Pinch of Nom Everyday Light: 100 Tasty, Slimming Recipes All Under 400 Calories Hardcover"
               price={29.99}
               image="https://images-na.ssl-images-amazon.com/images/I/51hlRhTeRkL._SX369_BO1,204,203,200_.jpg"
-              rating={5}
+              rating={2}
             />
             <Product
-              id="34324"
+              id={34324}
               price={23.99}
               title="Kenwood kMix stand Mixer for Baking,
           Stylish Kitchen Mixer with K-beater, Dough Hook and Whisk, 5 Liter
@@ -35,15 +35,15 @@ export default function Home() {
 
           <div className="home__row">
             <Product
-              id="3424234"
+              id={3424234}
               title="HONOR Watch GS Pro - Multisport Smartwatch with 25-Day Battery Life, Military Standard Certified, GPS, 1.39 inch AMOLED Touch Screen, IP68 Water Resistance, Heart Rate Tracking for Outdoors, Black"
               price={40.99}
               image="https://images.samsung.com/is/image/samsung/uk/galaxy-note20/gallery/uk-galaxy-watch3-r840-sm-r840nzsaeua-frontmysticsilver-274582207?$PD_GALLERY_L_SHOP_JPG$"
-              rating={5}
+              rating={3}
             />
 
             <Product
-              id="334224"
+              id={334224}
               price={50}
               title="Hosome Vacuum Cleaner, 25000Pa Powerful Suction Stick Vacuum Cleaner with Digital Display & Mounting Bracket, Cordless Vacuum Up to 43 Mins Runtime, 2 Brushes for Hard Floor Carpet Pet Hair"
               rating={4}
@@ -51,27 +51,27 @@ export default function Home() {
             />
 
             <Product
-              id="34324"
+              id={34324}
               price={20.89}
               title="Stynice Gaming Headset with Noise Cancelling for Xbox One/PS4/PS5/PC/Laptop/MAC-Stereo Surround Lightweight Soft Earmuffs Headphone with 3.5MM Jack & Mic & LED Light (Green)"
-              rating={4}
+              rating={5}
               image="https://images-na.ssl-images-amazon.com/images/I/71FSYnpZNSL._AC_SL1200_.jpg"
             />
           </div>
 
           <div className="home__row">
             <Product
-              id="12342142"
+              id={12342142}
               title="EACHINE E511, Drone with Camera for Adults 1080p, Drone with Camera for Beginners, Drone WIFI FPV APP, Drone Long Flight Time 17 Minutes, RC Drone Foldable"
               price={99.99}
               image="https://images-na.ssl-images-amazon.com/images/I/6191wfhJmFL._AC_SL1000_.jpg"
-              rating={5}
+              rating={1}
             />
             <Product
-              id="34324"
+              id={34324}
               price={110}
               title="Muscle Massage Gun, Deep Tissue Body Massager Electric Quiet Portable Massaging Gun 20 Speed Vibration-6 Head Professional Percussion Fascia Gun Recharge Relief Recovery for Pain,Sore and Stiffness"
-              rating={4}
+              rating={3}
               image="https://images-na.ssl-images-amazon.com/images/I/51hEAzRcXRL._AC_SL1000_.jpg"
             />
           </div>

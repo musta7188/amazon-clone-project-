@@ -9,7 +9,6 @@ function Checkout({basket}) {
 
   const [basketItem, setBasket] = useState([])
 
-  console.log(basketItem)
   useEffect(() =>{
     setBasket(basket)
   })
