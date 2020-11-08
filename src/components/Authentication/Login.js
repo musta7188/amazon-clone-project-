@@ -10,10 +10,13 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const body = {
-      email: email,
-      password: password,
-    };
+    auth.signInWithEmailAndPassword(email, password).then(auth =>{
+      if(auth){
+        history.push('/')
+      }
+
+    })
+    .catch((error) => alert(error.message))
 
   };
 
@@ -23,7 +26,7 @@ function Login() {
       auth.createUserWithEmailAndPassword(email, password)
       .then((auth) => {
         ///send back an auth object 
-        console.log(auth)
+        ///if user is registered successfully push it to the front page
         if(auth){
           history.push('/')
         }
