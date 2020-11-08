@@ -1,7 +1,21 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import '../../styles/Login.css'
 function Login() {
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+
+  const handleSubmit = (e)=>{
+      e.preventDefault();
+      const body = {
+        email: email,
+        password: password
+      }
+  }
+
+console.log(email, password)
   return (
     <div className='login'>
         
@@ -13,11 +27,19 @@ function Login() {
       <div className="login__container">
 
         <h1>Sign in</h1>
-        <form>
+        <form onSubmit={(e) => handleSubmit(e)} >
           <h5>Email</h5>
-          <input type='text'/>
+          <input 
+          type='text' 
+          value={email}
+          onChange={(e) =>setEmail(e.target.value)}
+          
+          />
           <h5>Password</h5>
-          <input type='password'/>
+          <input type='password'
+          value={password}
+          onChange={(e) =>setPassword(e.target.value)}
+          />
           <button className='login__singInButton'> Sing In</button>
         </form>
         <p>
