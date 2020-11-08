@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
+import {auth} from '../../FireBase/index'
 import "../../styles/Login.css";
 function Login() {
-  const history = useHistory;
+  ///allow to use the url
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,7 +19,18 @@ function Login() {
 
   const register = (e )=>{
       e.preventDefault();
-      
+
+      auth.createUserWithEmailAndPassword(email, password)
+      .then((auth) => {
+        ///send back an auth object 
+        console.log(auth)
+        if(auth){
+          history.push('/')
+        }
+      })
+      .catch((error) => alert(error.message))
+
+
  }
 
 
