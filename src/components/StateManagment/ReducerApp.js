@@ -1,5 +1,6 @@
 const initialState = {
   basket: [],
+  user: null
 };
 
 
@@ -29,9 +30,16 @@ const ReducerApp = (state = initialState, action) => {
         return{
           ...state,
           basket: newBasket
-        }
+        };
 
+        case  "SAVE_USER":
+          return{
+            ...state,
+            user: action.payload.email
+          }
+      
 
+        
 
 
       default:

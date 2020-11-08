@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import {auth} from '../../FireBase/index'
+import { auth } from "../../FireBase/index";
+import {connect} from 'react-redux'
 import "../../styles/Login.css";
-function Login() {
+function Login({saveUserInput}) {
   ///allow to use the url
   const history = useHistory();
   const [email, setEmail] = useState("");
@@ -10,32 +11,32 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    auth.signInWithEmailAndPassword(email, password).then(auth =>{
-      if(auth){
-        history.push('/')
-      }
-
-    })
-    .catch((error) => alert(error.message))
-
-  };
-
-  const register = (e )=>{
-      e.preventDefault();
-
-      auth.createUserWithEmailAndPassword(email, password)
+    auth
+      .signInWithEmailAndPassword(email, password)
       .then((auth) => {
-        ///send back an auth object 
-        ///if user is registered successfully push it to the front page
-        if(auth){
-          history.push('/')
+        if (auth) {
+          saveUserInput({email, password})
+          history.push("/");
         }
       })
-      .catch((error) => alert(error.message))
+      .catch((error) => alert(error.message));
+  };
 
+  const register = (e) => {
+    e.preventDefault();
 
- }
-
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((auth) => {
+        ///send back an auth object
+        ///if user is registered successfully push it to the front page
+        if (auth) {
+          history.push("/");
+        
+        }
+      })
+      .catch((error) => alert(error.message));
+  };
 
   console.log(email, password);
   return (
@@ -79,4 +80,10 @@ function Login() {
   );
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) =>{
+  return {
+    saveUserInput: (userObject) => dispatch({type: "SAVE_USER", payload: userObject})
+  }
+}
+
+export default connect(null,mapDispatchToProps)(Login);
