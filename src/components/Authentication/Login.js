@@ -15,7 +15,7 @@ function Login({saveUserInput}) {
       .signInWithEmailAndPassword(email, password)
       .then((auth) => {
         if (auth) {
-          saveUserInput({email, password})
+          saveUserInput(auth)
           history.push("/");
         }
       })
@@ -31,6 +31,7 @@ function Login({saveUserInput}) {
         ///send back an auth object
         ///if user is registered successfully push it to the front page
         if (auth) {
+          saveUserInput(auth)
           history.push("/");
         
         }
@@ -82,7 +83,7 @@ function Login({saveUserInput}) {
 
 const mapDispatchToProps = (dispatch) =>{
   return {
-    saveUserInput: (userObject) => dispatch({type: "SAVE_USER", payload: userObject})
+    saveUserInput: (userObject) => dispatch({type: "USER_STATUS", payload: userObject})
   }
 }
 

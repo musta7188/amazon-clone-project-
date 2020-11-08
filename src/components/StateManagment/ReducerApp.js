@@ -32,10 +32,10 @@ const ReducerApp = (state = initialState, action) => {
           basket: newBasket
         };
 
-        case  "SAVE_USER":
+        case  "USER_STATUS":
           return{
             ...state,
-            user: action.payload.email
+            user: action.payload
           }
       
 

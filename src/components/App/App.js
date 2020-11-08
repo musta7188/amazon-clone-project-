@@ -1,23 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../styles/App.css";
 import Header from "../Header/Header";
 import Home from "../Home/Home";
-import login from '../Authentication/Login'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Checkout from '../Checkout/Checkout'
+import Checkout from "../Checkout/Checkout";
 import Login from "../Authentication/Login";
-function App() {
+import { auth } from "../../FireBase/index";
+import { connect } from "react-redux";
+
+function App({ userStateValue }) {
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      console.log("THE USER IS >>>", authUser);
+
+      if (authUser) {
+        ///if user is logged in
+        userStateValue(authUser);
+      } else {
+        ///else is logged out
+        userStateValue(null);
+      }
+    });
+  }, []);
+
   return (
     <Router>
       <div className="App">
         <Header />
-        
+
         <Switch>
-        <Route path="/login">
-          <Login/>
+          <Route path="/login">
+            <Login />
           </Route>
+
           <Route path="/checkout">
-           <Checkout/>
+            <Checkout />
           </Route>
           <Route path="/">
             <Home />
@@ -28,4 +45,11 @@ function App() {
   );
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    userStateValue: (userObject) =>
+      dispatch({ type: "USER_STATUS", payload: userObject }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(App);
