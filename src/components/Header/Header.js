@@ -5,12 +5,15 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 function Header({ basket, user, userStateValue }) {
-  const [userObj, setUser] = useState(null);
 
-  useEffect(() => {
-    setUser(user);
-  }, []);
 
+ 
+
+  const checkOutUser = (status) =>{
+    userStateValue(status)
+    returnHeaderOnUserStatus(status)
+  }
+console.log(user)
   const returnHeaderOnUserStatus = (u) => {
     if (!u) {
       return (
@@ -27,9 +30,9 @@ function Header({ basket, user, userStateValue }) {
     } else {
       return (
         <>
-          <Link to="/log-out" onClick={() => userStateValue(userObj)}>
+          <Link to="/log-out" onClick={() => checkOutUser(null)}>
             <div className="header__option">
-              <span className="header__optionLineOne">Hello {user.email}</span>
+              <span className="header__optionLineOne">Hello {u.email}</span>
 
               <span className="header__optionLineTwo">Log Out</span>
             </div>
@@ -56,7 +59,13 @@ function Header({ basket, user, userStateValue }) {
       </div>
       {/* options nav bar 4 options */}
       <div className="header__nav">
-        {returnHeaderOnUserStatus(user)}
+        
+        {
+
+        returnHeaderOnUserStatus(user)
+      
+        
+        }
 
         <div className="header__option">
           <span className="header__optionLineOne">Returns</span>

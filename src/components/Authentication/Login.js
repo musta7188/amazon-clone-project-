@@ -15,7 +15,7 @@ function Login({saveUserInput}) {
       .signInWithEmailAndPassword(email, password)
       .then((auth) => {
         if (auth) {
-          saveUserInput(auth)
+          saveUserInput(auth.user)
           history.push("/");
         }
       })
