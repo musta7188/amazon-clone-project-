@@ -1,7 +1,10 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 
-export const returnHeaderOnUserStatus = (u, userStateFunction) => {
+
+
+////takes user status and a function to checkout the guest
+export const returnHeaderOnUserStatus = (u, checkOutUser) => {
   if (!u) {
     return (
       <>
@@ -17,7 +20,7 @@ export const returnHeaderOnUserStatus = (u, userStateFunction) => {
   } else {
     return (
       <>
-        <Link to="/log-out" onClick={() => userStateFunction(null)}>
+        <Link to="/log-out" onClick={() => checkOutUser(null)}>
           <div className="header__option">
             <span className="header__optionLineOne">Hello {u.email}</span>
 
