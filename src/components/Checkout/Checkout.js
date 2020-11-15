@@ -5,15 +5,16 @@ import {connect} from 'react-redux'
 import CheckoutProduct from './CheckOutProduct'
 
 
-function Checkout({basket}) {
+function Checkout({basket, user}) {
 
   const [basketItem, setBasket] = useState([])
 
   useEffect(() =>{
     setBasket(basket)
   })
-
+   
   return (
+
     <div className="checkout">
       <div className="checkout_left">
         <img
@@ -21,9 +22,9 @@ function Checkout({basket}) {
           src="https://images-eu.ssl-images-amazon.com/images/G/02/gc/2017/ASV/TopUp_1500x150.png"
           alt="checkout banner"
         />
-
         <div>
           <h2 className="checkout__title">Your shopping Basket</h2>
+          <h3>Hello {user.email}</h3>
           {basketItem.map(item => {
            return <>
             <CheckoutProduct
@@ -50,6 +51,7 @@ function Checkout({basket}) {
 const mapStateToProps = (state) => {
   return {
     basket: state.basket,
+    user: state.user
   };
 };
 export default connect(mapStateToProps)(Checkout)
