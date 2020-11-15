@@ -2,9 +2,12 @@ import React from "react";
 import "../../styles/Subtotal.css";
 import { connect } from "react-redux";
 import NumberFormat from "react-number-format";
+import { useHistory } from "react-router-dom";
 function Subtotal({ basket }) {
   ////take each item in the basket and add the price value to amount variable
   let totalPrice = basket.reduce((amount, items) => items.price + amount, 0);
+
+  const history = useHistory();
 
   return (
     <div className="subtotal">
@@ -26,7 +29,7 @@ function Subtotal({ basket }) {
         thousandSeparator={true}
         prefix={"$"}
       />
-      <button>Proceed to Checkout</button>
+      <button onClick={e => history.push('./payment')}>Proceed to Checkout</button>
     </div>
   );
 }

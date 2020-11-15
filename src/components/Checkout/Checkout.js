@@ -3,6 +3,7 @@ import "../../styles/Checkout.css";
 import Subtotal from './Subtotal'
 import {connect} from 'react-redux'
 import CheckoutProduct from './CheckOutProduct'
+import FlipMove from 'react-flip-move'
 
 
 function Checkout({basket, user}) {
@@ -12,6 +13,7 @@ function Checkout({basket, user}) {
   useEffect(() =>{
     setBasket(basket)
   })
+
    
   return (
 
@@ -19,12 +21,13 @@ function Checkout({basket, user}) {
       <div className="checkout_left">
         <img
         className="checkout__ad"
-          src="https://images-eu.ssl-images-amazon.com/images/G/02/gc/2017/ASV/TopUp_1500x150.png"
+          src="https://images-eu.ssl-images-amazon.com/images/sG/02/gc/2017/ASV/TopUp_1500x150.png"
           alt="checkout banner"
         />
         <div>
           <h2 className="checkout__title">Your shopping Basket</h2>
-          <h3>Hello {user.email}</h3>
+          <h3>Hello {user? user.email: "Loading..."}</h3>
+   
           {basketItem.map(item => {
            return <>
             <CheckoutProduct
@@ -37,6 +40,7 @@ function Checkout({basket, user}) {
             />
             </>
           })}
+
 
         </div>
       </div>
