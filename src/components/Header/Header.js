@@ -4,42 +4,12 @@ import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { returnHeaderOnUserStatus } from "./helperFunctionHeader";
 function Header({ basket, user, userStateValue }) {
-
-
- 
-
-  const checkOutUser = (status) =>{
-    userStateValue(status)
-    returnHeaderOnUserStatus(status)
-  }
-console.log(user)
-  const returnHeaderOnUserStatus = (u) => {
-    if (!u) {
-      return (
-        <>
-          <Link to="/login">
-            <div className="header__option">
-              <span className="header__optionLineOne">Hello Guest</span>
-
-              <span className="header__optionLineTwo">Sign In</span>
-            </div>
-          </Link>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <Link to="/log-out" onClick={() => checkOutUser(null)}>
-            <div className="header__option">
-              <span className="header__optionLineOne">Hello {u.email}</span>
-
-              <span className="header__optionLineTwo">Log Out</span>
-            </div>
-          </Link>
-        </>
-      );
-    }
+  
+  const checkOutUser = (status) => {
+    userStateValue(status);
+    returnHeaderOnUserStatus(status);
   };
 
   return (
@@ -59,13 +29,7 @@ console.log(user)
       </div>
       {/* options nav bar 4 options */}
       <div className="header__nav">
-        
-        {
-
-        returnHeaderOnUserStatus(user)
-      
-        
-        }
+        {returnHeaderOnUserStatus(user, checkOutUser)}
 
         <div className="header__option">
           <span className="header__optionLineOne">Returns</span>
