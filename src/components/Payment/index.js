@@ -1,18 +1,35 @@
 import userEvent from "@testing-library/user-event";
-import React from "react";
+import React, {useState} from "react";
 import CheckoutProduct from "../Checkout/CheckOutProduct";
 import '../../styles/Payment.css'
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import {CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { Card } from "@material-ui/core";
 function Payment({ user, basket }) {
+
+
+  const [error, setError] = useState(null)
+  const [disabled, setDisabled] = useState(true)
 
 
   const stripe = useStripe();
   const elements = useElements();
 
 
+  const handelSubmit = (e) =>{
+    ///all the stripe logic here 
 
+  }
+
+  const handelChange = (e) =>{
+    ///Listen for changes in the cardElement 
+    ///and display any errors as the customer types their card details
+    setDisabled(e.empty)
+    setError(e.error ? e.error.message: "")
+
+
+  }
 
   return (
     <div className="payment">
@@ -64,6 +81,9 @@ function Payment({ user, basket }) {
           </div>
           <div className="payment__details">
             {/* Stripe code */}
+            <form onSubmit={handelSubmit}>
+              <CardElement onChange={handelChange}/>
+            </form>
           </div>
         </div>
       </div>
