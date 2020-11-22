@@ -1,5 +1,5 @@
 import userEvent from "@testing-library/user-event";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import CheckoutProduct from "../Checkout/CheckOutProduct";
 import '../../styles/Payment.css'
 import { connect } from "react-redux";
@@ -11,16 +11,53 @@ function Payment({ user, basket }) {
 
   let totalPrice = basket.reduce((amount, items) => items.price + amount, 0);
 
+
+  const [succeeded, setSucceeded] = useState(false)
+  const [processing, setProcessing] = useState("")
+
+
   const [error, setError] = useState(null)
   const [disabled, setDisabled] = useState(true)
+  const [clientSecret, setClientSecret] = useState(true)
 
+  useEffect(() =>{
+    //// generate the special stripe secret which allows us to charge a costumer
+
+    const getClientSecret = async () =>{
+      const response = await axios({
+        method: 'post',
+        ///stripes expects the total in currencies subunits (in cent $10 = 1000)
+        url: `/payments/create?total=${totalPrice * 100} `
+      })
+      setClientSecret(response.data.clientSecret);
+    }
+
+    getClientSecret();
+  }, [basket])
 
   const stripe = useStripe();
   const elements = useElements();
 
 
-  const handelSubmit = (e) =>{
+  const handelSubmit = async (e) =>{
     ///all the stripe logic here 
+    e.preventDefault();
+    setProcessing(true)
+
+    ////clientSecret is how stripes knows how much we going to charge to the clients
+    const payload = await stripe.confirmCardPayment(clientSecret, {
+      ///this is the card we are getting from the clients
+      payment_method: {
+        card: elements.getElement(CardElement)
+      }
+    }).then(({paymentIntent}))
+    ////we distruct the paymentIntent which is the payment confirmation we get as response
+
+    setSucceeded(true)
+    setError(null)
+    setProcessing(false)
+
+    history.replace('/orders')
 
   }
 
@@ -95,9 +132,12 @@ function Payment({ user, basket }) {
                     displayType={"text"}
                     thousandSeparator={true}
                     prefix={"$"}
-                
                 />
+                <button disabled={processing|| disabled || succeeded}>
+                <span>{processing? <p>Processing</p>: "Buy Now"}</span>
+                </button>
               </div>
+              {error && <div>{error}</div>}
             </form>
           </div>
         </div>
