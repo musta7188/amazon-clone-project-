@@ -6,8 +6,10 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import {CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { Card } from "@material-ui/core";
+import CurrencyFormat from 'react-currency-format'
 function Payment({ user, basket }) {
 
+  let totalPrice = basket.reduce((amount, items) => items.price + amount, 0);
 
   const [error, setError] = useState(null)
   const [disabled, setDisabled] = useState(true)
@@ -83,6 +85,19 @@ function Payment({ user, basket }) {
             {/* Stripe code */}
             <form onSubmit={handelSubmit}>
               <CardElement onChange={handelChange}/>
+              <div className='payment__priceContainer'>
+                <CurrencyFormat 
+                    renderText={(value) =>(
+                        <h3>Order Total: {value}</h3>
+                    )}
+                    decimalScale={2}
+                    value={totalPrice}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"$"}
+                
+                />
+              </div>
             </form>
           </div>
         </div>
