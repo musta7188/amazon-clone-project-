@@ -8,6 +8,11 @@ import Login from "../Authentication/Login";
 import { auth } from "../../FireBase/index";
 import { connect } from "react-redux";
 import Payment from '../Payment'
+import {loadStripe} from '@stripe/stripe-js'
+import {Elements} from "@stripe/react-stripe-js"
+
+///stripe token 
+const promise = loadStripe('pk_live_pEynAh0UyzYq3w7fmAyp50MG')
 
 function App({ userStateValue }) {
   useEffect(() => {
@@ -35,7 +40,9 @@ function App({ userStateValue }) {
           </Route>
 
           <Route path="/payment">
-            <Payment />
+            <Elements stripe={promise}>
+              <Payment />
+            </Elements>
           </Route>
 
           <Route path="/checkout">

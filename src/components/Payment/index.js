@@ -4,7 +4,16 @@ import CheckoutProduct from "../Checkout/CheckOutProduct";
 import '../../styles/Payment.css'
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-function index({ user, basket }) {
+import {CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+function Payment({ user, basket }) {
+
+
+  const stripe = useStripe();
+  const elements = useElements();
+
+
+
+
   return (
     <div className="payment">
       <div className="payment__container">
@@ -69,4 +78,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(index);
+export default connect(mapStateToProps)(Payment);
