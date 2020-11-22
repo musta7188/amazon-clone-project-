@@ -12,7 +12,7 @@ import {loadStripe} from '@stripe/stripe-js'
 import {Elements} from "@stripe/react-stripe-js"
 
 ///stripe token 
-const promise = loadStripe('pk_live_pEynAh0UyzYq3w7fmAyp50MG')
+const promise = loadStripe('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')
 
 function App({ userStateValue }) {
   useEffect(() => {

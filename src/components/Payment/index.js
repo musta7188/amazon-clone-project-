@@ -3,14 +3,15 @@ import React, {useState, useEffect} from "react";
 import CheckoutProduct from "../Checkout/CheckOutProduct";
 import '../../styles/Payment.css'
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { Card } from "@material-ui/core";
 import CurrencyFormat from 'react-currency-format'
+import axios from '../axios/axios'
 function Payment({ user, basket }) {
 
   let totalPrice = basket.reduce((amount, items) => items.price + amount, 0);
-
+  const history = useHistory();
 
   const [succeeded, setSucceeded] = useState(false)
   const [processing, setProcessing] = useState("")
@@ -50,14 +51,17 @@ function Payment({ user, basket }) {
       payment_method: {
         card: elements.getElement(CardElement)
       }
-    }).then(({paymentIntent}))
+    }).then(({paymentIntent}) => {
+
+        setSucceeded(true)
+        setError(null)
+        setProcessing(false)
+
+        history.replace('/orders')
+
+    })
     ////we distruct the paymentIntent which is the payment confirmation we get as response
 
-    setSucceeded(true)
-    setError(null)
-    setProcessing(false)
-
-    history.replace('/orders')
 
   }
 

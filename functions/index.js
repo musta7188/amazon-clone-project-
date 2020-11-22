@@ -23,3 +23,5 @@ app.get('/', (request, response) => response.status(200).send("works"))
 // - Listen Command
 
 exports.api = functions.https.onRequest(app)
+
+///http://localhost:5001/challenge-4b2b2/us-central1/api
