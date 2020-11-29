@@ -8,6 +8,7 @@ import {CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { Card } from "@material-ui/core";
 import CurrencyFormat from 'react-currency-format'
 import axios from '../axios/axios'
+import {db} from '../../FireBase'
 function Payment({ user, basket, emptyBasket }) {
 
   let totalPrice = basket.reduce((amount, items) => items.price + amount, 0);
@@ -52,6 +53,16 @@ function Payment({ user, basket, emptyBasket }) {
         card: elements.getElement(CardElement)
       }
     }).then(({paymentIntent}) => {
+
+      db.collection('users')
+      .doc(user?.id)
+      .collection('orders')
+      .doc(paymentIntent.id)
+      .set({
+        basket: basket,
+        amount: paymentIntent.amount,
+        created: paymentIntent.created
+      })
 
         setSucceeded(true)
         setError(null)
