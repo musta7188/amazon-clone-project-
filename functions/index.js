@@ -5,7 +5,7 @@ const cors = require("cors");
 const { response } = require('express');
 
 const stripe = require("stripe")(
-  "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"
+  "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"
 )
 
 // API

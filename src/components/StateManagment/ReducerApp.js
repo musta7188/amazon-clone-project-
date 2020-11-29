@@ -38,6 +38,11 @@ const ReducerApp = (state = initialState, action) => {
             user: action.payload
           }
       
+          case "REMOVE_FROM_BASKET":
+            return{
+              ...state,
+              basket: []
+            }
 
         
 

@@ -8,7 +8,7 @@ import {CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { Card } from "@material-ui/core";
 import CurrencyFormat from 'react-currency-format'
 import axios from '../axios/axios'
-function Payment({ user, basket }) {
+function Payment({ user, basket, emptyBasket }) {
 
   let totalPrice = basket.reduce((amount, items) => items.price + amount, 0);
   const history = useHistory();
@@ -55,11 +55,15 @@ function Payment({ user, basket }) {
 
         setSucceeded(true)
         setError(null)
-        setProcessing(false)
+        setProcessing(false);
+        emptyBasket()
 
         history.replace('/orders')
-
     })
+
+
+
+  
     ////we distruct the paymentIntent which is the payment confirmation we get as response
 
 
@@ -127,6 +131,7 @@ function Payment({ user, basket }) {
             <form onSubmit={handelSubmit}>
               <CardElement onChange={handelChange}/>
               <div className='payment__priceContainer'>
+                
                 <CurrencyFormat 
                     renderText={(value) =>(
                         <h3>Order Total: {value}</h3>
@@ -157,4 +162,12 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Payment);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    emptyBasket: () =>dispatch({ type: "EMPTY_BASKET"}),
+  };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Payment);
