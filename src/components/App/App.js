@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import Payment from '../Payment'
 import {loadStripe} from '@stripe/stripe-js'
 import {Elements} from "@stripe/react-stripe-js"
+import Orders from '../Orders/Orders'
 
 ///stripe token 
 const promise = loadStripe('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')
@@ -35,6 +36,11 @@ function App({ userStateValue }) {
         <Header />
 
         <Switch>
+
+        <Route path="/orders">
+            <Orders />
+          </Route>
+
           <Route path="/login">
             <Login />
           </Route>
